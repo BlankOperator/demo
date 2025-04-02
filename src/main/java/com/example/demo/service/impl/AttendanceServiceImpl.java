@@ -10,6 +10,8 @@ import com.example.demo.mapper.AttendanceMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Collections;
+import java.util.List;
 
 /**
 * @author Legend
@@ -38,6 +40,13 @@ public class AttendanceServiceImpl extends ServiceImpl<AttendanceMapper, Attenda
         wrapper.orderByDesc(Attendance::getDate);
         return this.page(page, wrapper);
     }
+
+    @Override
+    public List<Attendance> getAllAttendanceList() {
+        return this.list();
+    }
+
+
 }
 
 
