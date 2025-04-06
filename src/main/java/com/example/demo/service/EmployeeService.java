@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.pojo.Employee;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
 * @author Legend
 * @description 针对表【employee】的数据库操作Service
@@ -17,4 +19,6 @@ public interface EmployeeService extends IService<Employee> {
     boolean addEmployee(Employee employee);
 
     boolean updateEmployee(Employee employee);
+
+    List<Employee> getEmployeeIdList();
 }

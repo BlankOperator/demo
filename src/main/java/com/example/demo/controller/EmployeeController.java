@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class EmployeeController {
     @Autowired
@@ -34,5 +36,10 @@ public class EmployeeController {
     @PostMapping("/updateEmployee")
     public boolean updateEmployee(@RequestBody Employee employee){
         return employeeService.updateEmployee(employee);
+    }
+
+    @GetMapping("/getEmployeeIdList")
+    public List<Employee> getEmployeeIdList(){
+        return employeeService.getEmployeeIdList();
     }
 }

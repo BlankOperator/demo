@@ -10,6 +10,9 @@ import com.example.demo.mapper.EmployeeMapper;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.List;
+
 /**
 * @author Legend
 * @description 针对表【employee】的数据库操作Service实现
@@ -57,6 +60,11 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
         UpdateWrapper<Employee> updateWrapper = new UpdateWrapper<>();
         updateWrapper.eq("username", employee.getUsername());
         return this.update(employee, updateWrapper);
+    }
+
+    @Override
+    public List<Employee> getEmployeeIdList() {
+        return this.list();
     }
 
 }
