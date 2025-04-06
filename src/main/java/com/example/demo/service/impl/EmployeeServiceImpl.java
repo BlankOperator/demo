@@ -67,6 +67,11 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
         return this.list();
     }
 
+    @Override
+    public Boolean updateProfile(Employee employee) {
+        return this.updateById(employee);
+    }
+
 }
 
 

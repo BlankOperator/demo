@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.demo.pojo.Employee;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -21,4 +22,6 @@ public interface EmployeeService extends IService<Employee> {
     boolean updateEmployee(Employee employee);
 
     List<Employee> getEmployeeIdList();
+
+    Boolean updateProfile(Employee employee);
 }

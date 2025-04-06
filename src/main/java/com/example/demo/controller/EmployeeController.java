@@ -42,4 +42,10 @@ public class EmployeeController {
     public List<Employee> getEmployeeIdList(){
         return employeeService.getEmployeeIdList();
     }
+
+    @PostMapping("/profile")
+    public Boolean updateProfile(@RequestBody Employee employee){
+        System.out.println(employee);
+        return employeeService.updateProfile(employee);
+    }
 }
