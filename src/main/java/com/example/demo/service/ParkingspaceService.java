@@ -15,10 +15,6 @@ public interface ParkingspaceService extends IService<Parkingspace> {
 
     Boolean addParkingSpace(Parkingspace parkingspace);
 
-
-//    Boolean deleteParkingSpace(Integer id);
-
-
     Boolean updateParkingSpace(Parkingspace parkingspace);
 
     List<ParkingSpaceDto> getParkingSpaceList();
