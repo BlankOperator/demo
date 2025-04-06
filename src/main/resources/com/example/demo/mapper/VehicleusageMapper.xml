@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.VehicleusageMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.demo.pojo.Vehicleusage">
+            <id property="usageId" column="usage_id" />
+            <result property="vehicleId" column="vehicle_id" />
+            <result property="employeeId" column="employee_id" />
+            <result property="usageDate" column="usage_date" />
+            <result property="purpose" column="purpose" />
+            <result property="space" column="space" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        usage_id,vehicle_id,employee_id,usage_date,purpose,space
+    </sql>
+</mapper>

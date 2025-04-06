@@ -4,38 +4,44 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import java.util.Date;
 import lombok.Data;
 
 /**
  * 
- * @TableName vehicle
+ * @TableName vehicleusage
  */
-@TableName(value ="vehicle")
+@TableName(value ="vehicleusage")
 @Data
-public class Vehicle {
+public class Vehicleusage {
     /**
      * 
      */
     @TableId(type = IdType.AUTO)
+    private Integer usageId;
+
+    /**
+     * 
+     */
     private Integer vehicleId;
 
     /**
      * 
      */
-        private String licensePlate;
+    private Integer employeeId;
 
     /**
      * 
      */
-    private String model;
+    private Date usageDate;
 
     /**
      * 
      */
-    private String brand;
+    private String purpose;
 
     /**
      * 
      */
-    private Integer assignedTo;
+    private String space;
 }

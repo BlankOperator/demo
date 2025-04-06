@@ -63,6 +63,21 @@ public class VehicleServiceImpl extends ServiceImpl<VehicleMapper, Vehicle>
         }
         return ans;
     }
+
+    @Override
+    public List<Vehicle> getVehicleListById(Integer employeeId) {
+        // Retrieve all vehicles from the database
+        List<Vehicle> list = this.list();
+        // Convert Vehicle objects to VehicleDto objects
+        List<Vehicle> ans = new ArrayList<>();
+        for (Vehicle vehicle : list) {
+            // Get the employee associated with the vehicle
+            if (vehicle.getAssignedTo() == employeeId) {
+                ans.add(vehicle);
+            }
+        }
+        return ans;
+    }
 }
 
 

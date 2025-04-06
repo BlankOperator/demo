@@ -31,4 +31,8 @@ public class ParkingSpaceController {
     public Boolean updateParkingSpace(@RequestBody Parkingspace parkingspace){
         return parkingspaceService.updateParkingSpace(parkingspace);
     }
+    @GetMapping("/getParkingSpaceListById")
+    public List<Parkingspace> getParkingSpaceListById(Integer employeeId){
+        return parkingspaceService.getParkingSpaceListById(employeeId);
+    }
 }

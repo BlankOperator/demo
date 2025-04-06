@@ -64,6 +64,13 @@ public class ParkingspaceServiceImpl extends ServiceImpl<ParkingspaceMapper, Par
         }
         return ans;
     }
+
+    @Override
+    public List<Parkingspace> getParkingSpaceListById(Integer employeeId) {
+        LambdaQueryWrapper<Parkingspace> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Parkingspace::getAssignedTo, employeeId);
+        return this.list(wrapper);
+    }
 }
 
 

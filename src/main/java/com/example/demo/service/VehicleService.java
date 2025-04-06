@@ -15,4 +15,6 @@ public interface VehicleService extends IService<Vehicle> {
     Boolean addVehicle(Vehicle vehicle);
 
     List<VehicleDto> getVehicleList();
+
+    List<Vehicle> getVehicleListById(Integer employeeId);
 }

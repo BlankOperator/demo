@@ -32,4 +32,9 @@ public class VehicleController {
     public Boolean updateVehicle(@RequestBody Vehicle vehicle){
         return vehicleService.updateById(vehicle);
     }
+
+    @GetMapping("/getVehicleListById")
+    public List<Vehicle> getVehicleListById(Integer employeeId){
+        return vehicleService.getVehicleListById(employeeId);
+    }
 }

@@ -19,4 +19,6 @@ public interface ParkingspaceService extends IService<Parkingspace> {
 
     List<ParkingSpaceDto> getParkingSpaceList();
 
+    List<Parkingspace> getParkingSpaceListById(Integer employeeId);
+
 }
