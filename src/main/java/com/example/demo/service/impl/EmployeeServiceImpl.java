@@ -72,6 +72,19 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
         return this.updateById(employee);
     }
 
+    @Override
+    public Boolean register(Employee employee) {
+        if(employee.getUsername() == null || employee.getPassword() == null)
+            return false;
+        LambdaQueryWrapper<Employee> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Employee::getUsername, employee.getUsername());
+        Employee existingEmployee = this.getOne(wrapper);
+        if(existingEmployee != null) {
+            return false;
+        }
+        return this.save(employee);
+    }
+
 }
 
 

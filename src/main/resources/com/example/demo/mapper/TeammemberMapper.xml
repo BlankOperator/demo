@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.TeammemberMapper">
+
+    <resultMap id="BaseResultMap" type="com.example.demo.pojo.Teammember">
+            <id property="id" column="id" />
+            <result property="teamId" column="team_id" />
+            <result property="managerId" column="manager_id" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,team_id,manager_id
+    </sql>
+</mapper>

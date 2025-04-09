@@ -24,4 +24,6 @@ public interface EmployeeService extends IService<Employee> {
     List<Employee> getEmployeeIdList();
 
     Boolean updateProfile(Employee employee);
+
+    Boolean register(Employee employee);
 }

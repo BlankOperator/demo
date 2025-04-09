@@ -48,4 +48,10 @@ public class EmployeeController {
         System.out.println(employee);
         return employeeService.updateProfile(employee);
     }
+
+    @PostMapping("/register")
+    public Boolean register(@RequestBody Employee employee){
+        System.out.println(employee);
+        return employeeService.register(employee);
+    }
 }
