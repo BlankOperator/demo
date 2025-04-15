@@ -16,7 +16,7 @@ public class RoleMenu {
     /**
      * 
      */
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
     /**

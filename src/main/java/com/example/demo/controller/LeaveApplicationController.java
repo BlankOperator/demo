@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 public class LeaveApplicationController {
     @Autowired
-    LeaveapplicationService leaveapplicationService;
+    private LeaveapplicationService leaveapplicationService;
 
     @PostMapping("/addLeaveApplication")
     public Boolean addLeaveApplication(@RequestBody Leaveapplication leaveapplication) {
@@ -25,5 +25,10 @@ public class LeaveApplicationController {
     @GetMapping("/getLeaveApplications")
     public List<LeaveApplicationDto> getLeaveApplicationsById(Integer employeeId) {
         return leaveapplicationService.getLeaveApplicationsById(employeeId);
+    }
+
+    @PostMapping("/deleteLeaveApplication")
+    public Boolean deleteLeaveApplication(@RequestBody Leaveapplication leaveapplication) {
+        return leaveapplicationService.deleteLeaveApplication(leaveapplication.getLeaveId());
     }
 }

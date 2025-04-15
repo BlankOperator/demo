@@ -17,7 +17,7 @@ public class Dailyreport {
     /**
      * 
      */
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Integer reportId;
 
     /**

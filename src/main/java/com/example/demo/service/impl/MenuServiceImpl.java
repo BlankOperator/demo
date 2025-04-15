@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.demo.dto.MenuDto;
+import com.example.demo.dto.PermissionDto;
 import com.example.demo.pojo.Menu;
 import com.example.demo.pojo.Role;
 import com.example.demo.pojo.RoleMenu;
@@ -65,6 +66,40 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu>
             hashMap.get(roleMenu.getMenuId()).setSelect(true);
         }
         return hashMap.get(root);
+    }
+
+    @Override
+    public Boolean assignPermission(PermissionDto permission) {
+        LambdaQueryWrapper<Role> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Role::getName, permission.getRole());
+        Role role = roleService.getOne(wrapper);
+        LambdaQueryWrapper<RoleMenu> del = new LambdaQueryWrapper<>();
+        del.eq(RoleMenu::getRoleId, role.getId());
+        roleMenuService.remove(del);
+        for(Integer menuId : permission.getPermissionId()) {
+            RoleMenu newRoleMenu = new RoleMenu();
+            newRoleMenu.setRoleId(role.getId());
+            newRoleMenu.setMenuId(menuId);
+            roleMenuService.save(newRoleMenu);
+        }
+        return true;
+    }
+
+    @Override
+    public PermissionDto getPermissionList(String roleName) {
+        LambdaQueryWrapper<Role> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Role::getName, roleName);
+        Role role = roleService.getOne(wrapper);
+        LambdaQueryWrapper<RoleMenu> roleMenuWrapper = new LambdaQueryWrapper<>();
+        roleMenuWrapper.eq(RoleMenu::getRoleId, role.getId());
+        List<RoleMenu> roleMenuList = roleMenuService.list(roleMenuWrapper);
+        ArrayList<Integer> permissionId = new ArrayList<>();
+        for (RoleMenu roleMenu : roleMenuList) {
+            permissionId.add(roleMenu.getMenuId());
+        }
+        PermissionDto permissionDto = new PermissionDto();
+        permissionDto.setPermissionId(permissionId);
+        return permissionDto;
     }
 }
 

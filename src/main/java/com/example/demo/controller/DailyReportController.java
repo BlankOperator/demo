@@ -27,4 +27,9 @@ public class DailyReportController {
         System.out.println(employeeId);
         return dailyreportService.getDailyReportsById(employeeId);
     }
+    @PostMapping("/deleteDailyReport")
+    public Boolean deleteDailyReport(@RequestBody Dailyreport dailyreport) {
+        System.out.println(dailyreport);
+        return dailyreportService.removeById(dailyreport.getReportId());
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.MenuDto;
+import com.example.demo.dto.PermissionDto;
 import com.example.demo.pojo.Menu;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.demo.pojo.Role;
@@ -13,4 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 */
 public interface MenuService extends IService<Menu> {
     MenuDto getMenuListByRole(String roleName);
+
+    Boolean assignPermission(PermissionDto permission);
+
+    PermissionDto getPermissionList(String roleName);
 }

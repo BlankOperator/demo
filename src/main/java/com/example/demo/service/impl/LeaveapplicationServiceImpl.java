@@ -58,6 +58,14 @@ public class LeaveapplicationServiceImpl extends ServiceImpl<LeaveapplicationMap
         }
         return ans;
     }
+
+    @Override
+    public Boolean deleteLeaveApplication(Integer leaveId) {
+        System.out.println("deleteLeaveApplication : " + leaveId);
+        LambdaQueryWrapper<Leaveapplication> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Leaveapplication::getLeaveId, leaveId);
+        return this.remove(wrapper);
+    }
 }
 
 

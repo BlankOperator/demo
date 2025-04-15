@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.dto.LeaveApplicationDto;
 import com.example.demo.pojo.Leaveapplication;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface LeaveapplicationService extends IService<Leaveapplication> {
     Boolean addLeaveApplication(Leaveapplication leaveapplication);
 
     List<LeaveApplicationDto> getLeaveApplicationsById(Integer employeeId);
+
+    Boolean deleteLeaveApplication(Integer leaveId);
 }
