@@ -51,6 +51,7 @@ public class LeaveapplicationServiceImpl extends ServiceImpl<LeaveapplicationMap
             Employee employee = employeeService.getById(leaveapplication.getEmployeeId());
             if (employee != null) {
                 leaveApplicationDto.setUsername(employee.getUsername());
+                leaveApplicationDto.setPhone(employee.getPhone());
             } else {
                 leaveApplicationDto.setUsername("null");
             }
@@ -65,6 +66,33 @@ public class LeaveapplicationServiceImpl extends ServiceImpl<LeaveapplicationMap
         LambdaQueryWrapper<Leaveapplication> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(Leaveapplication::getLeaveId, leaveId);
         return this.remove(wrapper);
+    }
+
+    @Override
+    public List<LeaveApplicationDto> getLeaveApplicationsByStatus() {
+        LambdaQueryWrapper<Leaveapplication> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(Leaveapplication::getStatus, "未审批");
+        List<Leaveapplication> list = this.list(wrapper);
+        List<LeaveApplicationDto> ans = new ArrayList<>();
+        for(Leaveapplication leaveapplication : list) {
+            LeaveApplicationDto leaveApplicationDto = new LeaveApplicationDto();
+            leaveApplicationDto.setLeaveId(leaveapplication.getLeaveId());
+            leaveApplicationDto.setEmployeeId(leaveapplication.getEmployeeId());
+            leaveApplicationDto.setStartDate(leaveapplication.getStartDate());
+            leaveApplicationDto.setEndDate(leaveapplication.getEndDate());
+            leaveApplicationDto.setReason(leaveapplication.getReason());
+            leaveApplicationDto.setStatus(leaveapplication.getStatus());
+            leaveApplicationDto.setType(leaveapplication.getType());
+            Employee employee = employeeService.getById(leaveapplication.getEmployeeId());
+            if (employee != null) {
+                leaveApplicationDto.setUsername(employee.getUsername());
+                leaveApplicationDto.setPhone(employee.getPhone());
+            } else {
+                leaveApplicationDto.setUsername("null");
+            }
+            ans.add(leaveApplicationDto);
+        }
+        return ans;
     }
 }
 

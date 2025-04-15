@@ -2,11 +2,16 @@ package com.example.demo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.demo.dto.DailyReportDto;
 import com.example.demo.pojo.Dailyreport;
+import com.example.demo.pojo.Employee;
 import com.example.demo.service.DailyreportService;
 import com.example.demo.mapper.DailyreportMapper;
+import com.example.demo.service.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -18,6 +23,8 @@ import java.util.List;
 @Service
 public class DailyreportServiceImpl extends ServiceImpl<DailyreportMapper, Dailyreport>
     implements DailyreportService{
+    @Autowired
+    private EmployeeService employeeService;
 
     @Override
     public Boolean addDailyReport(Dailyreport dailyreport) {
@@ -32,6 +39,26 @@ public class DailyreportServiceImpl extends ServiceImpl<DailyreportMapper, Daily
         // You can also add sorting or other conditions if needed
         wrapper.orderByDesc(Dailyreport::getDate);
         return this.list(wrapper);
+    }
+
+    @Override
+    public List<DailyReportDto> getAllDailyReports() {
+        // Assuming you have a method in the mapper to get all daily reports
+        List<Dailyreport> dailyReports = this.list();
+        List<DailyReportDto> ans = new ArrayList<>();
+        for(Dailyreport dailyReport : dailyReports) {
+            DailyReportDto dto = new DailyReportDto();
+            dto.setReportId(dailyReport.getReportId());
+            dto.setEmployeeId(dailyReport.getEmployeeId());
+            dto.setDate(dailyReport.getDate());
+            dto.setContent(dailyReport.getContent());
+            // Add other fields as needed
+            Employee employee = employeeService.getById(dailyReport.getEmployeeId());
+            dto.setName(employee.getName());
+            dto.setPhone(employee.getPhone());
+            ans.add(dto);
+        }
+        return ans;
     }
 }
 

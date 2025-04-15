@@ -18,4 +18,6 @@ public interface LeaveapplicationService extends IService<Leaveapplication> {
     List<LeaveApplicationDto> getLeaveApplicationsById(Integer employeeId);
 
     Boolean deleteLeaveApplication(Integer leaveId);
+
+    List<LeaveApplicationDto> getLeaveApplicationsByStatus();
 }

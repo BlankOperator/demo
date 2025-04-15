@@ -21,5 +21,7 @@ public class LeaveApplicationDto {
     private String type;
 
     private String username;
+
+    private String phone;
     // Add any other fields or methods you need
 }

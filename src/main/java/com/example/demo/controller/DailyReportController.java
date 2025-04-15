@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.DailyReportDto;
 import com.example.demo.pojo.Dailyreport;
 import com.example.demo.pojo.Vehicleusage;
 import com.example.demo.service.DailyreportService;
@@ -31,5 +32,10 @@ public class DailyReportController {
     public Boolean deleteDailyReport(@RequestBody Dailyreport dailyreport) {
         System.out.println(dailyreport);
         return dailyreportService.removeById(dailyreport.getReportId());
+    }
+
+    @GetMapping("/allDailyReport")
+    public List<DailyReportDto> getAllDailyReports() {
+        return dailyreportService.getAllDailyReports();
     }
 }

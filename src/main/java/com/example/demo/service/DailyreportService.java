@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.DailyReportDto;
 import com.example.demo.pojo.Dailyreport;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,4 +16,6 @@ public interface DailyreportService extends IService<Dailyreport> {
     Boolean addDailyReport(@RequestBody Dailyreport dailyreport);
 
     List<Dailyreport> getDailyReportsById(Integer employeeId); // Method to get daily reports by employee ID
+
+    List<DailyReportDto> getAllDailyReports(); // Method to get all daily reports
 }

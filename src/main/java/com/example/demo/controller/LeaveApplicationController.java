@@ -31,4 +31,9 @@ public class LeaveApplicationController {
     public Boolean deleteLeaveApplication(@RequestBody Leaveapplication leaveapplication) {
         return leaveapplicationService.deleteLeaveApplication(leaveapplication.getLeaveId());
     }
+
+    @GetMapping("/getLeaveApplicationsByStatus")
+    public List<LeaveApplicationDto> getLeaveApplicationsByStatus() {
+        return leaveapplicationService.getLeaveApplicationsByStatus();
+    }
 }
