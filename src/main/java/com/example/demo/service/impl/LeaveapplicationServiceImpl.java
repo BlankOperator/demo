@@ -2,6 +2,7 @@ package com.example.demo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.demo.dto.LeaveApplicationDto;
 import com.example.demo.pojo.Employee;
@@ -93,6 +94,23 @@ public class LeaveapplicationServiceImpl extends ServiceImpl<LeaveapplicationMap
             ans.add(leaveApplicationDto);
         }
         return ans;
+    }
+
+    @Override
+    public Boolean approveLeave(Integer leaveId) {
+        LambdaUpdateWrapper<Leaveapplication> updateWrapper = new LambdaUpdateWrapper<>();
+        updateWrapper.eq(Leaveapplication::getLeaveId, leaveId);
+        updateWrapper.set(Leaveapplication::getStatus, "批准");
+        return this.update(updateWrapper);
+
+    }
+
+    @Override
+    public Boolean rejectLeave(Integer leaveId) {
+        LambdaUpdateWrapper<Leaveapplication> updateWrapper = new LambdaUpdateWrapper<>();
+        updateWrapper.eq(Leaveapplication::getLeaveId, leaveId);
+        updateWrapper.set(Leaveapplication::getStatus, "拒绝");
+        return this.update(updateWrapper);
     }
 }
 

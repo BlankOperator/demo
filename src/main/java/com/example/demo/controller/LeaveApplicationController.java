@@ -36,4 +36,16 @@ public class LeaveApplicationController {
     public List<LeaveApplicationDto> getLeaveApplicationsByStatus() {
         return leaveapplicationService.getLeaveApplicationsByStatus();
     }
+
+    @PostMapping("/approveLeave")
+    public Boolean approveLeave(@RequestBody LeaveApplicationDto dto) {
+        System.out.println(dto);
+        return leaveapplicationService.approveLeave(dto.getLeaveId());
+    }
+
+    @PostMapping("/rejectLeave")
+    public Boolean rejectLeave(@RequestBody LeaveApplicationDto dto) {
+        System.out.println(dto);
+        return leaveapplicationService.rejectLeave(dto.getLeaveId());
+    }
 }

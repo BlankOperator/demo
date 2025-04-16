@@ -20,4 +20,8 @@ public interface LeaveapplicationService extends IService<Leaveapplication> {
     Boolean deleteLeaveApplication(Integer leaveId);
 
     List<LeaveApplicationDto> getLeaveApplicationsByStatus();
+
+    Boolean approveLeave(Integer leaveId); // Method to approve leave application
+
+    Boolean rejectLeave(Integer leaveId); // Method to reject leave application
 }
