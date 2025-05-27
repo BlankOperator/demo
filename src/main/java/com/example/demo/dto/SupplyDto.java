@@ -32,4 +32,6 @@ public class SupplyDto {
 
     private String username;
 
+
+    private String imageUrl;
 }

@@ -18,7 +18,7 @@ public interface OfficesuppliesService extends IService<Officesupplies> {
      * @param officesupplies 办公用品
      * @return 是否添加成功
      */
-    Boolean addSupply(Officesupplies officesupplies);
+    Integer addSupply(Officesupplies officesupplies);
 
     Officesupplies getSupplyById(Integer supplyId);
 

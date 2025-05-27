@@ -19,7 +19,7 @@ public class OfficeSupplyController {
     @Autowired
     private OfficesuppliesService officesuppliesService;
     @PostMapping("/addSupply")
-    public Boolean addSupply(@RequestBody Officesupplies officesupplies){
+    public Integer addSupply(@RequestBody Officesupplies officesupplies){
         System.out.println(officesupplies);
         return officesuppliesService.addSupply(officesupplies);
     }

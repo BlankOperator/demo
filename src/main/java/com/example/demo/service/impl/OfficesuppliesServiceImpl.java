@@ -6,8 +6,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.demo.dto.SupplyDto;
 import com.example.demo.pojo.Attendance;
 import com.example.demo.pojo.Employee;
+import com.example.demo.pojo.Officeimage;
 import com.example.demo.pojo.Officesupplies;
 import com.example.demo.service.EmployeeService;
+import com.example.demo.service.OfficeimageService;
 import com.example.demo.service.OfficesuppliesService;
 import com.example.demo.mapper.OfficesuppliesMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,15 +29,13 @@ public class OfficesuppliesServiceImpl extends ServiceImpl<OfficesuppliesMapper,
 
     @Autowired
     private EmployeeService employeeService;
+    @Autowired
+    private OfficeimageService officeimageService;
 
     @Override
-    public Boolean addSupply(Officesupplies officesupplies) {
-        try {
-            return this.save(officesupplies);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
+    public Integer addSupply(Officesupplies officesupplies) {
+        this.save(officesupplies);
+        return officesupplies.getSupplyId();
     }
 
     @Override
@@ -56,6 +56,8 @@ public class OfficesuppliesServiceImpl extends ServiceImpl<OfficesuppliesMapper,
             supplyDto.setPurchaseDate(supply.getPurchaseDate());
             supplyDto.setQuantity(supply.getQuantity());
             Employee employee = employeeService.getById(supply.getPurchasedBy());
+            Officeimage officeimage = officeimageService.getOfficeImageBySupplyId(supply.getSupplyId());
+            supplyDto.setImageUrl("http://localhost:9091/image/" + officeimage.getName());
             supplyDto.setUsername(employee.getName());
             supplyDtoList.add(supplyDto);
         }
