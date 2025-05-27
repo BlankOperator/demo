@@ -19,7 +19,7 @@ public class VehicleController {
     private VehicleService vehicleService;
     // Add methods to handle requests related to vehicles
     @PostMapping("/addVehicle")
-    public Boolean addVehicle(@RequestBody Vehicle vehicle){
+    public Integer addVehicle(@RequestBody Vehicle vehicle){
         System.out.println(vehicle);
         return vehicleService.addVehicle(vehicle);
     }

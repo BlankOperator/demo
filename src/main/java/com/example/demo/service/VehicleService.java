@@ -12,7 +12,7 @@ import java.util.List;
 * @createDate 2025-04-06 15:50:12
 */
 public interface VehicleService extends IService<Vehicle> {
-    Boolean addVehicle(Vehicle vehicle);
+    Integer addVehicle(Vehicle vehicle);
 
     List<VehicleDto> getVehicleList();
 

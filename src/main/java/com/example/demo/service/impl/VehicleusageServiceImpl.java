@@ -5,11 +5,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.demo.dto.VehicleUsageDto;
 import com.example.demo.pojo.Employee;
 import com.example.demo.pojo.Vehicle;
+import com.example.demo.pojo.Vehicleimage;
 import com.example.demo.pojo.Vehicleusage;
-import com.example.demo.service.EmployeeService;
-import com.example.demo.service.ParkingspaceService;
-import com.example.demo.service.VehicleService;
-import com.example.demo.service.VehicleusageService;
+import com.example.demo.service.*;
 import com.example.demo.mapper.VehicleusageMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +27,8 @@ public class VehicleusageServiceImpl extends ServiceImpl<VehicleusageMapper, Veh
     private VehicleService vehicleService;
     @Autowired
     private EmployeeService employeeService;
+    @Autowired
+    private VehicleimageService vehicleimageService;
     @Override
     public Boolean addVehicleUsage(Vehicleusage vehicleusage) {
         return this.save(vehicleusage);
@@ -49,6 +49,8 @@ public class VehicleusageServiceImpl extends ServiceImpl<VehicleusageMapper, Veh
             vehicleUsageDto.setUsername(employee.getUsername());
             Vehicle vehicle = vehicleService.getById(vehicleusage.getVehicleId());
             vehicleUsageDto.setLicensePlate(vehicle.getLicensePlate());
+            Vehicleimage vehicleimage = vehicleimageService.getImageByVehicleId(vehicleusage.getVehicleId());
+            vehicleUsageDto.setImageUrl("http://localhost:9091/image/" + vehicleimage.getName());
             vehicleUsageDtoList.add(vehicleUsageDto);
         }
         ans.setRecords(vehicleUsageDtoList);

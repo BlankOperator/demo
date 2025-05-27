@@ -16,4 +16,5 @@ public class VehicleUsageDto {
     private String purpose;
     //车位
     private String space;
+    private String imageUrl;
 }

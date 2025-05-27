@@ -28,15 +28,16 @@ public class VehicleServiceImpl extends ServiceImpl<VehicleMapper, Vehicle>
     private EmployeeService employeeService;
 
     @Override
-    public Boolean addVehicle(Vehicle vehicle) {
+    public Integer addVehicle(Vehicle vehicle) {
         // Check if the vehicle already exists in the database
         LambdaQueryWrapper<Vehicle> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(Vehicle::getLicensePlate, vehicle.getLicensePlate());
         if(this.getOne(wrapper) != null) {
-            return false;
+            return 0;
         }
         // 调用 MyBatis-Plus 的 save 方法插入数据
-        return this.save(vehicle);
+        this.save(vehicle);
+        return vehicle.getVehicleId();
     }
 
     @Override
