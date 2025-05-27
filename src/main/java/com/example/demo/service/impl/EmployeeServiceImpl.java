@@ -33,8 +33,13 @@ public class EmployeeServiceImpl extends ServiceImpl<EmployeeMapper, Employee>
     }
 
     @Override
-    public Page<Employee> getEmployeeList(Page<Employee> page) {
-        return this.page(page);
+    public Page<Employee> getEmployeeList(Page<Employee> page, String keyword) {
+        LambdaQueryWrapper<Employee> wrapper = new LambdaQueryWrapper<>();
+        boolean condition = keyword != null && !"".equals(keyword);
+        wrapper.like(condition, Employee::getName, keyword)
+               .or().like(condition, Employee::getRole, keyword)
+               .or().like(condition, Employee::getPhone, keyword);
+        return this.page(page, wrapper);
     }
 
     @Override

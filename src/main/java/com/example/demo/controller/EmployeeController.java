@@ -23,9 +23,9 @@ public class EmployeeController {
         return employeeService.login(employee);
     }
     @GetMapping("/list")
-    public Page<Employee> getEmployeeList(Integer pageNum, Integer pageSize){
+    public Page<Employee> getEmployeeList(Integer pageNum, Integer pageSize, String keyword){
         Page<Employee> page = new Page<>(pageNum, pageSize);
-        return employeeService.getEmployeeList(page);
+        return employeeService.getEmployeeList(page, keyword);
     }
 
     @PostMapping("/addEmployee")

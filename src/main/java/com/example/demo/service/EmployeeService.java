@@ -15,7 +15,7 @@ import java.util.List;
 public interface EmployeeService extends IService<Employee> {
     Employee login(Employee employee);
 
-    Page<Employee> getEmployeeList(Page<Employee> page);
+    Page<Employee> getEmployeeList(Page<Employee> page, String keyword);
 
     boolean addEmployee(Employee employee);
 
