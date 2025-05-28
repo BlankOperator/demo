@@ -22,5 +22,5 @@ public interface OfficesuppliesService extends IService<Officesupplies> {
 
     Officesupplies getSupplyById(Integer supplyId);
 
-    Page<SupplyDto> getSupplyList(Page<Officesupplies> page);
+    Page<SupplyDto> getSupplyList(Page<Officesupplies> page, String keyword);
 }

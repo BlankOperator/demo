@@ -25,8 +25,9 @@ public class OfficeSupplyController {
     }
 
     @GetMapping("/supplyList")
-    public Page<SupplyDto> getSupplyList(Integer pageNum, Integer pageSize){
+    public Page<SupplyDto> getSupplyList(Integer pageNum, Integer pageSize, String keyword){
+        System.out.println(keyword);
         Page<Officesupplies> page = new Page<>(pageNum, pageSize);
-        return this.officesuppliesService.getSupplyList(page);
+        return this.officesuppliesService.getSupplyList(page, keyword);
     }
 }

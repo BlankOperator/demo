@@ -44,8 +44,12 @@ public class OfficesuppliesServiceImpl extends ServiceImpl<OfficesuppliesMapper,
     }
 
     @Override
-    public Page<SupplyDto> getSupplyList(Page<Officesupplies> page) {
+    public Page<SupplyDto> getSupplyList(Page<Officesupplies> page, String keyword) {
         LambdaQueryWrapper<Officesupplies> wrapper = new LambdaQueryWrapper<>();
+        boolean condition = keyword != null && !"".equals(keyword);
+        wrapper.like(condition, Officesupplies::getName, keyword)
+               .or().like(condition, Officesupplies::getPurchasedBy, keyword)
+               .or().like(condition, Officesupplies::getQuantity, keyword);
         wrapper.orderByDesc(Officesupplies::getPurchaseDate);
         Page<Officesupplies> ans = this.page(page, wrapper);
         List<SupplyDto> supplyDtoList = new ArrayList<>();
