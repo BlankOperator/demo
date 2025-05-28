@@ -16,4 +16,6 @@ public class VehicleDto {
     private Integer assignedTo;
 
     private String userName;
+
+    private String imageUrl;
 }

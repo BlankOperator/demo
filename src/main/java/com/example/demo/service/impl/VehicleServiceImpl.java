@@ -6,9 +6,11 @@ import com.example.demo.dto.VehicleDto;
 import com.example.demo.pojo.Employee;
 import com.example.demo.pojo.Parkingspace;
 import com.example.demo.pojo.Vehicle;
+import com.example.demo.pojo.Vehicleimage;
 import com.example.demo.service.EmployeeService;
 import com.example.demo.service.VehicleService;
 import com.example.demo.mapper.VehicleMapper;
+import com.example.demo.service.VehicleimageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,8 @@ public class VehicleServiceImpl extends ServiceImpl<VehicleMapper, Vehicle>
     implements VehicleService{
     @Autowired
     private EmployeeService employeeService;
+    @Autowired
+    private VehicleimageService vehicleimageService;
 
     @Override
     public Integer addVehicle(Vehicle vehicle) {
@@ -55,6 +59,8 @@ public class VehicleServiceImpl extends ServiceImpl<VehicleMapper, Vehicle>
             vehicleDto.setModel(vehicle.getModel());
             vehicleDto.setBrand(vehicle.getBrand());
             vehicleDto.setAssignedTo(vehicle.getAssignedTo());
+            Vehicleimage vehicleimage = vehicleimageService.getImageByVehicleId(vehicle.getVehicleId());
+            vehicleDto.setImageUrl("http://localhost:9091/image/" + vehicleimage.getName());
             if (employee != null) {
                 vehicleDto.setUserName(employee.getUsername());
             } else {
@@ -66,7 +72,7 @@ public class VehicleServiceImpl extends ServiceImpl<VehicleMapper, Vehicle>
     }
 
     @Override
-    public List<Vehicle> getVehicleListById(Integer employeeId) {
+    public List<VehicleDto> getVehicleListById(Integer employeeId) {
         // Retrieve all vehicles from the database
         List<Vehicle> list = this.list();
         // Convert Vehicle objects to VehicleDto objects
@@ -77,7 +83,25 @@ public class VehicleServiceImpl extends ServiceImpl<VehicleMapper, Vehicle>
                 ans.add(vehicle);
             }
         }
-        return ans;
+        List<VehicleDto> vehicleDtoList = new ArrayList<>();
+        for (Vehicle vehicle : ans) {
+            VehicleDto vehicleDto = new VehicleDto();
+            vehicleDto.setVehicleId(vehicle.getVehicleId());
+            vehicleDto.setLicensePlate(vehicle.getLicensePlate());
+            vehicleDto.setModel(vehicle.getModel());
+            vehicleDto.setBrand(vehicle.getBrand());
+            vehicleDto.setAssignedTo(vehicle.getAssignedTo());
+            Vehicleimage vehicleimage = vehicleimageService.getImageByVehicleId(vehicle.getVehicleId());
+            vehicleDto.setImageUrl("http://localhost:9091/image/" + vehicleimage.getName());
+            Employee employee = employeeService.getById(vehicle.getAssignedTo());
+            if (employee != null) {
+                vehicleDto.setUserName(employee.getUsername());
+            } else {
+                vehicleDto.setUserName("null");
+            }
+            vehicleDtoList.add(vehicleDto);
+        }
+        return vehicleDtoList;
     }
 }
 

@@ -16,5 +16,5 @@ public interface VehicleService extends IService<Vehicle> {
 
     List<VehicleDto> getVehicleList();
 
-    List<Vehicle> getVehicleListById(Integer employeeId);
+    List<VehicleDto> getVehicleListById(Integer employeeId);
 }

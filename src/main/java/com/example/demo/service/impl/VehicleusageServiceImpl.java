@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.demo.dto.VehicleUsageDto;
@@ -36,7 +37,9 @@ public class VehicleusageServiceImpl extends ServiceImpl<VehicleusageMapper, Veh
 
     @Override
     public Page<VehicleUsageDto> getVehicleUsageList(Page<Vehicleusage> page) {
-        Page<Vehicleusage> tmp = this.page(page);
+        LambdaQueryWrapper<Vehicleusage> wrapper = new LambdaQueryWrapper<>();
+        wrapper.orderByDesc(Vehicleusage::getUsageDate);
+        Page<Vehicleusage> tmp = this.page(page, wrapper);
         Page<VehicleUsageDto> ans = new Page<>();
         ans.setTotal(tmp.getTotal());
         List<VehicleUsageDto> vehicleUsageDtoList = new ArrayList<>();

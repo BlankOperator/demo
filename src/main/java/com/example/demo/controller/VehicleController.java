@@ -34,7 +34,7 @@ public class VehicleController {
     }
 
     @GetMapping("/getVehicleListById")
-    public List<Vehicle> getVehicleListById(Integer employeeId){
+    public List<VehicleDto> getVehicleListById(Integer employeeId){
         return vehicleService.getVehicleListById(employeeId);
     }
 }
